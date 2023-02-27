@@ -1,41 +1,30 @@
-import React, {useState} from "react";
-import { SafeAreaView, Text, View, Button, FlatList, Switch } from "react-native";
-
-const data = [
-  {id: 0, name: 'cafe.exe', isFavorite: true},
-  {id: 1, name: 'KafaKafe', isFavorite: false},
-  {id: 2, name: 'BugG', isFavorite: false},
-  {id: 3, name: 'Rock n Code', isFavorite: true},
-  {id: 4, name: 'do(drink)', isFavorite: false},
-  {id: 5, name: 'esc', isFavorite: false},
-
-]
-
+import React, {useState, useEffect} from 'react';
+import { SafeAreaView, Text, Button } from 'react-native';
 
 function App(){
-  const [cafeList, setCafeList] = useState(data);
-  const [showOnlyFavorites, setShowOnlyFavorites] = useState(false);
+  const [number, setNumber] = useState(0);
+  const [counter, setCounter] = useState(100);
 
-  function onFavoritesChange(isFavoriteSelected){
-      setShowOnlyFavorites(isFavoriteSelected);
-      isFavoriteSelected ? 
-        setCafeList(cafeList.filter(cafe => cafe.isFavorite)) :setCafeList(data);
-  }
+  useEffect(() => {
+    console.log("number updated");
+  }, [number]);
 
 
+  useEffect(() => {
+    console.log("counter updated");
+  },[counter]);
 
+  
   return(
     <SafeAreaView>
-      <View>
-        <Text style={{margin: 10, fontSize:30, fontWeight:'bold'}}>Show Only Favorites</Text>
-        <Switch value={showOnlyFavorites} onValueChange={onFavoritesChange}/>
-      </View>
-      
-      <FlatList data={cafeList} renderItem={({item}) => <Text style={{fontSize: 25}}>{item.name}</Text>} />
-
-    
+      <Text>HELLO LIFECYCLE!</Text>
+      <Text>Number: {number}</Text>
+      <Text>Counter: {counter}</Text>
+      <Button title='Update Number' onPress={() => setNumber(number+1)}/>
+      <Button title='Update Counter' onPress={() => setCounter(counter+100)}/>
     </SafeAreaView>
   );
+
 }
 
 export default App;
