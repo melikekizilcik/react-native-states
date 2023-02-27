@@ -6,22 +6,20 @@ function App(){
   const [counter, setCounter] = useState(100);
 
   useEffect(() => {
-    console.log("number updated");
+    console.log("number updated: "+ number);
   }, [number]);
 
-
-  useEffect(() => {
-    console.log("counter updated");
-  },[counter]);
-
+  function updateCounter(){
+    console.log("1. state value: " + number);
+    setNumber(number+1);
+    console.log("2. state value: " + number);
+  }
   
   return(
     <SafeAreaView>
       <Text>HELLO LIFECYCLE!</Text>
       <Text>Number: {number}</Text>
-      <Text>Counter: {counter}</Text>
-      <Button title='Update Number' onPress={() => setNumber(number+1)}/>
-      <Button title='Update Counter' onPress={() => setCounter(counter+100)}/>
+      <Button title='Update Number' onPress={updateCounter}/>
     </SafeAreaView>
   );
 
